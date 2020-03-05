@@ -10,7 +10,15 @@ import cn.bmob.v3.BmobUser;
 public class UserEntity extends BmobUser {
     private String nikeName;
     private String userInfo;
+    private String headImgUrl;
 
+    public String getHeadImgUrl() {
+        return headImgUrl;
+    }
+
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
+    }
 
     public String getNikeName() {
         return nikeName;
