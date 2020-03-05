@@ -1,8 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
 
-    <include layout="@layout/layout_top_bar" />
+    <LinearLayout
+        android:id="@+id/ll_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <include layout="@layout/layout_top_bar" />
+
+        <RelativeLayout
+            android:id="@+id/rl_image_container"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_photo_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingRight="30dp">
+
+                <ImageView
+                    android:id="@+id/iv_priview_img_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/iv_priview_img_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/iv_priview_img_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_photo_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_add_photo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="添加照片"
+                    android:textColor="@color/color_69"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/ed_goods_title"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:hint="商品名称 品牌请如实填写"
+            android:paddingLeft="10dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/ed_goods_price"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:hint="写下你满意的转手价格（以元计例如：150）"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/ed_goods_owner_contact_num"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:hint="请注明您的联系（如:QQ:123456或 手机:10086）"
+            android:paddingLeft="10dp"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/ed_goods_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:gravity="top"
+            android:hint="为了您的宝贝尽快找到新主人\n请注明商品规格尺寸、品牌、转手原因、新旧程度和交易具体细节..."
+            android:padding="10dp"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="right"
+            android:paddingBottom="5dp">
+
+            <CheckBox
+                android:id="@+id/cb_trade_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="可议价"
+                android:textColor="@color/color_4d"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.zhuandian.trade.view.SettingItemView
+            android:id="@+id/siv_goods_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:left_text="选择分类"
+            app:right_text="日常用品"
+            app:right_text_color="@color/colorPrimary"
+            app:right_type="type_text" />
+
+
+        <TextView
+            android:id="@+id/tv_release"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="30dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="发布商品"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</ScrollView>

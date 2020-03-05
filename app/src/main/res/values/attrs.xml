@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--设置Item复用view-->
+    <declare-styleable name="SettingItemView">
+        <attr name="left_text" format="string" />
+        <attr name="right_text" format="string" />
+        <attr name="right_text_color" format="color" />
+        <attr name="is_show_under_line" format="boolean" />
+        <attr name="right_type" format="enum">
+            <enum name="type_text" value="0" />
+            <enum name="type_image" value="1" />
+            <enum name="type_switch" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
