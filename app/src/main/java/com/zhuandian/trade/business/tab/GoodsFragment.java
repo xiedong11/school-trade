@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.zhuandian.base.BaseFragment;
 import com.zhuandian.trade.R;
 import com.zhuandian.trade.adapter.GoodsAdapter;
+import com.zhuandian.trade.business.goods.GoodsItemActivity;
 import com.zhuandian.trade.business.goods.NewReleaseActivity;
 import com.zhuandian.trade.entity.GoodsEntity;
 import com.zhuandian.trade.entity.UserEntity;
@@ -64,9 +65,9 @@ public class GoodsFragment extends BaseFragment {
         goodsAdapter.setItemClickListener(new GoodsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(GoodsEntity entity) {
-//                Intent intent = new Intent(actitity, GoodsItemActivity.class);
-//                intent.putExtra(GlobalVariable.GOODS_ENTIT, entity);
-//                startActivity(intent);
+                Intent intent = new Intent(actitity, GoodsItemActivity.class);
+                intent.putExtra("goods_entity", entity);
+                startActivity(intent);
             }
         });
         loadDatas();
