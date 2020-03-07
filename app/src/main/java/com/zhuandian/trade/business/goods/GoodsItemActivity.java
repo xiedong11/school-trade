@@ -1,6 +1,7 @@
 package com.zhuandian.trade.business.goods;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,9 +38,11 @@ import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class GoodsItemActivity extends BaseActivity {
     @BindView(R.id.iv_back)
@@ -71,9 +75,12 @@ public class GoodsItemActivity extends BaseActivity {
     LinearLayout submitCommentLayout;
     @BindView(R.id.fab)
     FloatingActionButton fabButton;
+    @BindView(R.id.tv_likes)
+    TextView tvCollections;
     private GoodsEntity goodsEntity;
     private List<GoodsCommentEntity> commentDatas = new ArrayList<>();
     private GoodsCommentAdapter userCommentAdapter;
+    private boolean LIKES_FLAG = true; //收藏记录标志位
 
     @Override
     public int getLayoutId() {
@@ -111,7 +118,7 @@ public class GoodsItemActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.civ_header, R.id.iv_back, R.id.submit_comment, R.id.fab})
+    @OnClick({R.id.civ_header, R.id.iv_back, R.id.submit_comment, R.id.fab, R.id.tv_likes, R.id.tv_add_car})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_header:
@@ -127,7 +134,45 @@ public class GoodsItemActivity extends BaseActivity {
                 submitCommentLayout.setVisibility(View.VISIBLE);
                 fabButton.setVisibility(View.GONE);
                 break;
+            case R.id.tv_likes:
+                addCollection();
+                break;
+            case R.id.tv_add_car:
+                break;
         }
+    }
+
+    /**
+     * 添加收藏记录
+     */
+    private void addCollection() {
+        UserEntity user = BmobUser.getCurrentUser(UserEntity.class);
+        GoodsEntity post = new GoodsEntity();
+        post.setObjectId(goodsEntity.getObjectId());   //设置当前动态的id
+        //将当前用户添加到Post表中的likes字段值中，表明当前用户喜欢该帖子
+        BmobRelation relation = new BmobRelation();
+        if (LIKES_FLAG == true) {
+            //将当前用户添加到多对多关联中
+            relation.add(user);
+            LIKES_FLAG = false;
+        } else {
+            relation.remove(user);
+            LIKES_FLAG = true;
+        }
+        //多对多关联指向`post`的`likes`字段
+        post.setCollections(relation);
+        post.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    Toast.makeText(GoodsItemActivity.this, LIKES_FLAG == true ? "添加成功" : "移除成功", Toast.LENGTH_SHORT).show();
+                    Log.e("点赞状态更改成功" + LIKES_FLAG, "tag");
+                } else {
+                    Log.e("状态更新失败：" + e.getMessage(), "tag");
+                }
+            }
+
+        });
     }
 
     private void submitUserComment() {

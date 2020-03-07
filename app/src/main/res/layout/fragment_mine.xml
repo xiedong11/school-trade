@@ -30,6 +30,22 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_car"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="购物车" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
         android:id="@+id/tv_my_release"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -52,7 +68,7 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:text="我买到的" />
+        android:text="我评论的" />
 
     <View
         android:layout_width="match_parent"

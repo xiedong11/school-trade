@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * desc :
@@ -26,8 +27,17 @@ public class GoodsEntity extends BmobObject implements Serializable {
     private String goodsPrice;
     private String ownerContactNum;
     private UserEntity goodsOwner;
+    private BmobRelation collections; //收藏
     private int tradeType;  //交易类型
     private int goodsType;
+
+    public BmobRelation getCollections() {
+        return collections;
+    }
+
+    public void setCollections(BmobRelation collections) {
+        this.collections = collections;
+    }
 
     public int getTradeState() {
         return tradeState;
