@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.MessageItemAcitivity"></activity>
+        <activity android:name=".business.goods.MyShopingCarActivity"></activity>
+        <activity android:name=".business.goods.MyCommentGoodsActivity" />
+        <activity android:name=".business.goods.MyCollectionGoodsActivity" />
+        <activity android:name=".business.goods.MyReleaseGoodsActivity" />
+        <activity android:name=".business.MessageItemAcitivity" />
         <activity android:name=".business.goods.GoodsItemActivity" />
         <activity android:name=".business.goods.NewReleaseActivity" />
         <activity android:name=".business.login.UserRegisterActivity" />

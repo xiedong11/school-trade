@@ -1,6 +1,8 @@
 package com.zhuandian.trade.business.goods;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,7 +32,9 @@ import com.zhuandian.view.CircleImageView;
 import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,6 +85,7 @@ public class GoodsItemActivity extends BaseActivity {
     private List<GoodsCommentEntity> commentDatas = new ArrayList<>();
     private GoodsCommentAdapter userCommentAdapter;
     private boolean LIKES_FLAG = true; //收藏记录标志位
+    private SharedPreferences sharedPreferences;
 
     @Override
     public int getLayoutId() {
@@ -92,6 +97,7 @@ public class GoodsItemActivity extends BaseActivity {
     public void setUpView() {
         goodsEntity = (GoodsEntity) getIntent().getSerializableExtra("goods_entity");
         tvTitle.setText("商品详情");
+        sharedPreferences = getSharedPreferences("goods", Context.MODE_PRIVATE);
         tvUserName.setText(goodsEntity.getGoodsOwner().getUsername());
         tvGoodsPrice.setText(String.format("￥%s", goodsEntity.getGoodsPrice()));
         ivGoodsSoldOut.setVisibility(goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_SOLD_OUT ? View.VISIBLE : View.GONE);
@@ -138,41 +144,41 @@ public class GoodsItemActivity extends BaseActivity {
                 addCollection();
                 break;
             case R.id.tv_add_car:
+                addShopingCar();
                 break;
         }
+    }
+
+    /**
+     * 加入购物车
+     */
+    private void addShopingCar() {
+        Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
+        if (collection.contains(goodsEntity.getObjectId())){
+            collection.remove(goodsEntity.getObjectId());
+            Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
+        }else {
+            collection.add(goodsEntity.getObjectId());
+            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+        }
+
+        sharedPreferences.edit().putStringSet("shop_car",collection).commit();
     }
 
     /**
      * 添加收藏记录
      */
     private void addCollection() {
-        UserEntity user = BmobUser.getCurrentUser(UserEntity.class);
-        GoodsEntity post = new GoodsEntity();
-        post.setObjectId(goodsEntity.getObjectId());   //设置当前动态的id
-        //将当前用户添加到Post表中的likes字段值中，表明当前用户喜欢该帖子
-        BmobRelation relation = new BmobRelation();
-        if (LIKES_FLAG == true) {
-            //将当前用户添加到多对多关联中
-            relation.add(user);
-            LIKES_FLAG = false;
-        } else {
-            relation.remove(user);
-            LIKES_FLAG = true;
+        Set<String> collection = sharedPreferences.getStringSet("collection", new HashSet<>());
+        if (collection.contains(goodsEntity.getObjectId())){
+            collection.remove(goodsEntity.getObjectId());
+            Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
+        }else {
+            collection.add(goodsEntity.getObjectId());
+            Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
         }
-        //多对多关联指向`post`的`likes`字段
-        post.setCollections(relation);
-        post.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    Toast.makeText(GoodsItemActivity.this, LIKES_FLAG == true ? "添加成功" : "移除成功", Toast.LENGTH_SHORT).show();
-                    Log.e("点赞状态更改成功" + LIKES_FLAG, "tag");
-                } else {
-                    Log.e("状态更新失败：" + e.getMessage(), "tag");
-                }
-            }
 
-        });
+        sharedPreferences.edit().putStringSet("collection",collection).commit();
     }
 
     private void submitUserComment() {

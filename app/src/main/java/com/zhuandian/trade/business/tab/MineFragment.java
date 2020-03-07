@@ -12,6 +12,10 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zhuandian.base.BaseFragment;
 import com.zhuandian.trade.R;
+import com.zhuandian.trade.business.goods.MyCollectionGoodsActivity;
+import com.zhuandian.trade.business.goods.MyCommentGoodsActivity;
+import com.zhuandian.trade.business.goods.MyReleaseGoodsActivity;
+import com.zhuandian.trade.business.goods.MyShopingCarActivity;
 import com.zhuandian.trade.utils.PictureSelectorUtils;
 import com.zhuandian.view.CircleImageView;
 
@@ -41,7 +45,7 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_buy, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout})
+    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout,R.id.tv_car})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_header:
@@ -50,14 +54,20 @@ public class MineFragment extends BaseFragment {
             case R.id.tv_nick_name:
                 break;
             case R.id.tv_my_release:
+                startActivity(new Intent(actitity, MyReleaseGoodsActivity.class));
                 break;
-            case R.id.tv_my_buy:
+            case R.id.tv_my_comment:
+                startActivity(new Intent(actitity, MyCommentGoodsActivity.class));
                 break;
             case R.id.tv_my_collect:
+                startActivity(new Intent(actitity, MyCollectionGoodsActivity.class));
                 break;
             case R.id.tv_more_setting:
                 break;
             case R.id.tv_logout:
+                break;
+            case R.id.tv_car:
+                startActivity(new Intent(actitity, MyShopingCarActivity.class));
                 break;
         }
     }
