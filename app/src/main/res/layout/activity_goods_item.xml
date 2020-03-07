@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/layout_top_bar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/civ_header"
-                android:text="哈哈哈•曲阜"
+                android:text="哈哈哈"
                 android:textColor="#666666"
                 android:textSize="15sp" />
 
@@ -93,46 +94,62 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical" />
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_img_container"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+            <LinearLayout
+                android:id="@+id/submit_comment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_img_container"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/comment_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edittext_background"
+                    android:gravity="top"
+                    android:hint="说出你的见解..."
+                    android:paddingLeft="5dp"
+                    android:paddingTop="3dp"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/submit_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:text="发布评论"
+                    android:textColor="#f00" />
+            </LinearLayout>
+
+
         </RelativeLayout>
-    </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom">
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/tv_favorite"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@color/color_4d"
-            android:gravity="center"
-            android:text="收藏"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_personal_data"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@color/color_4d"
-            android:gravity="center"
-            android:text="看他资料"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_chat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="问问TA"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/heart_share_pen"
+        app:backgroundTint="#f9b1b107" />
 </LinearLayout>
