@@ -43,7 +43,6 @@ public class PersonalDataActivity extends BaseActivity {
     }
 
 
-
     @OnClick({R.id.iv_back, R.id.tv_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -53,11 +52,15 @@ public class PersonalDataActivity extends BaseActivity {
             case R.id.tv_submit:
                 if (!TextUtils.isEmpty(etNickName.getText().toString()) || !TextUtils.isEmpty(etUserPassword.getText().toString())) {
                     userEntity.setNikeName(etNickName.getText().toString());
-                    userEntity.setPassword(etUserPassword.getText().toString());
+                    //用户输入密码长度大于1时才可修改密码，不输入密码则只修改用户昵称
+                    if (etUserPassword.getText().toString().length() > 1) {
+                        userEntity.setPassword(etUserPassword.getText().toString());
+                    }
                     userEntity.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
+                                finish();
                                 Toast.makeText(PersonalDataActivity.this, "更新成功，重启生效...", Toast.LENGTH_SHORT).show();
                             }
                         }

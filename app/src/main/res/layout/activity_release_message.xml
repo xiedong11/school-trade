@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top_bar" />
+
+    <EditText
+        android:id="@+id/et_message_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:hint="输入消息标题" />
+
+    <EditText
+        android:id="@+id/et_message_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="输入消息标题" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/rb_type_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="失物招领" />
+
+        <RadioButton
+            android:id="@+id/rb_type_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="寻物启事" />
+
+        <RadioButton
+            android:id="@+id/rb_type_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统消息" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_release"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="发 布"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+</LinearLayout>
