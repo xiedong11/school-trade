@@ -11,6 +11,15 @@ public class UserEntity extends BmobUser {
     private String nikeName;
     private String userInfo;
     private String headImgUrl;
+    private String userSchool;
+
+    public String getUserSchool() {
+        return userSchool;
+    }
+
+    public void setUserSchool(String userSchool) {
+        this.userSchool = userSchool;
+    }
 
     public String getHeadImgUrl() {
         return headImgUrl;

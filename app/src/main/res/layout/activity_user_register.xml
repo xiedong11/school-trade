@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_margin="20dp">
@@ -27,7 +27,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_login_bg"
-            android:hint="请输入手机号"
+            android:hint="请输入用户名"
             android:paddingLeft="10dp"
             android:textSize="14sp" />
 
@@ -42,12 +42,33 @@
             android:hint="请输入登陆密码"
             android:inputType="numberPassword"
             android:textSize="14sp" />
+        <EditText
+            android:layout_height="40dp"
+            android:background="@drawable/shape_login_bg"
+            android:paddingLeft="10dp"
+            android:id="@+id/et_school"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/et_password"
+            android:layout_margin="20dp"
+            android:hint="请输入您的学校"
+            android:textSize="14sp" />
+        <EditText
+            android:layout_height="40dp"
+            android:background="@drawable/shape_login_bg"
+            android:paddingLeft="10dp"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/et_school"
+            android:layout_margin="20dp"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_below="@+id/et_password"
+            android:layout_below="@+id/et_phone"
             android:layout_margin="20dp"
             android:background="@color/colorPrimary"
             android:gravity="center"

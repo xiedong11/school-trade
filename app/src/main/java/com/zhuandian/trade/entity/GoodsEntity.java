@@ -30,6 +30,25 @@ public class GoodsEntity extends BmobObject implements Serializable {
     private BmobRelation collections; //收藏
     private int tradeType;  //交易类型
     private int goodsType;
+    private String goodsLocal;  //商品所在学校
+    private UserEntity buyer; //购买者信息
+
+
+    public UserEntity getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(UserEntity buyer) {
+        this.buyer = buyer;
+    }
+
+    public String getGoodsLocal() {
+        return goodsLocal;
+    }
+
+    public void setGoodsLocal(String goodsLocal) {
+        this.goodsLocal = goodsLocal;
+    }
 
     public BmobRelation getCollections() {
         return collections;

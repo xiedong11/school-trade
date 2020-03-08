@@ -176,6 +176,7 @@ public class NewReleaseActivity extends BaseActivity {
         goodsEntity.setGoodsPrice(goodsPrice);
         goodsEntity.setTradeType(goodsTradeType);
         goodsEntity.setGoodsType(goodsType);
+        goodsEntity.setGoodsLocal(currentUser.getUserSchool());
         goodsEntity.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
