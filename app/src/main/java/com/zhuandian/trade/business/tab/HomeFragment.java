@@ -17,6 +17,7 @@ import com.youth.banner.loader.ImageLoader;
 import com.zhuandian.base.BaseFragment;
 import com.zhuandian.trade.R;
 import com.zhuandian.trade.adapter.GoodsAdapter;
+import com.zhuandian.trade.business.goods.GoodsFilterActivity;
 import com.zhuandian.trade.business.goods.GoodsItemActivity;
 import com.zhuandian.trade.entity.GoodsEntity;
 
@@ -59,7 +60,6 @@ public class HomeFragment extends BaseFragment {
             add("双12趁现在");
         }
     };
-
 
 
     @Override
@@ -107,8 +107,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initList() {
-        SharedPreferences sharedPreferences = actitity.getSharedPreferences("goods",Context.MODE_PRIVATE);
-        int likeType = sharedPreferences.getInt("goods_type",0);
+        SharedPreferences sharedPreferences = actitity.getSharedPreferences("goods", Context.MODE_PRIVATE);
+        int likeType = sharedPreferences.getInt("goods_type", 0);
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         query.order("-updatedAt");
@@ -133,15 +133,27 @@ public class HomeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_music:
+                go2GoodsFilterActivity(2, "电子设备");
                 break;
             case R.id.ll_life:
+                go2GoodsFilterActivity(0, "日常用品");
                 break;
             case R.id.ll_book:
+                go2GoodsFilterActivity(3, "资料书籍");
                 break;
             case R.id.ll_makeup:
+                go2GoodsFilterActivity(4, "美妆洗化");
                 break;
             case R.id.ll_other:
+                go2GoodsFilterActivity(1, "杂七杂八");
                 break;
         }
+    }
+
+    private void go2GoodsFilterActivity(int goodsType, String title) {
+        Intent intent = new Intent(actitity, GoodsFilterActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("goodsType", goodsType);
+        startActivity(intent);
     }
 }
