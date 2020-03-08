@@ -21,6 +21,7 @@ public class GoodsEntity extends BmobObject implements Serializable {
     public static final int TRADE_TYPE_NO_BARGAIN = 2; //不可议价
     public static final int GOODS_STATE_SOLD_OUT = 3; //商品下架
     public static final int GOODS_STATE_ON_SALE = 4; //商品在售
+    public static final int GOODS_STATE_ON_TRADE= 5; //商品交易中
     private List<String> goodsUrl;
     private String goodsTitle;
     private String goodsContent;

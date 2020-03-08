@@ -6,13 +6,12 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:background="#ffffff"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginBottom="6dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp">
 
         <com.zhuandian.view.CircleImageView
             android:id="@+id/civ_header"
@@ -50,6 +49,20 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/iv_goods_trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="交易中"
+            android:textColor="#f00"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,8 +75,8 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_user_name"
             android:layout_below="@+id/tv_user_name"
+            android:layout_alignLeft="@+id/tv_user_name"
             android:layout_marginTop="5dp"
             android:text="2018/02/16"
             android:textColor="@color/color_69"
@@ -73,8 +86,8 @@
             android:id="@+id/tv_goods_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_user_name"
             android:layout_below="@+id/tv_time"
+            android:layout_alignLeft="@+id/tv_user_name"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -86,9 +99,9 @@
             android:id="@+id/rv_goods_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_goods_content"
             android:layout_alignLeft="@+id/tv_user_name"
-            android:layout_marginBottom="30dp"
-            android:layout_below="@+id/tv_goods_content" />
+            android:layout_marginBottom="30dp" />
 
 
         <TextView
@@ -96,8 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_toRightOf="@+id/civ_header"
             android:text="￥120"
             android:textColor="#f00"

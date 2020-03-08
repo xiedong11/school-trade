@@ -1,7 +1,9 @@
 package com.zhuandian.trade.business.goods;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -96,6 +98,29 @@ public class GoodsItemActivity extends BaseActivity {
     @Override
     public void setUpView() {
         goodsEntity = (GoodsEntity) getIntent().getSerializableExtra("goods_entity");
+        if (goodsEntity.getGoodsOwner().getObjectId().equals(BmobUser.getCurrentUser(UserEntity.class).getObjectId()) && goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_ON_TRADE) {
+            new AlertDialog.Builder(this)
+                    .setTitle("交易中")
+                    .setMessage("当前有买家正在购买此商品，是否同意出售")
+                    .setPositiveButton("同意出售", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goodsEntity.delete(goodsEntity.getObjectId(), new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    dialog.dismiss();
+                                    Toast.makeText(GoodsItemActivity.this, "交易完成，当前商品已经卖出", Toast.LENGTH_SHORT).show();
+                                    GoodsItemActivity.this.finish();
+                                }
+                            });
+                        }
+                    }).setNegativeButton("暂不出售", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
+        }
         tvTitle.setText("商品详情");
         sharedPreferences = getSharedPreferences("goods", Context.MODE_PRIVATE);
         tvUserName.setText(goodsEntity.getGoodsOwner().getUsername());
@@ -112,9 +137,8 @@ public class GoodsItemActivity extends BaseActivity {
         getAllUserComment();  //得到所有参与该动态评论的用户信息和内容
 
         // 更新猜你喜欢商品tpye
-        sharedPreferences.edit().putInt("goods_type",goodsEntity.getGoodsType()).commit();
+        sharedPreferences.edit().putInt("goods_type", goodsEntity.getGoodsType()).commit();
     }
-
 
 
     private void initGoodsImg(final List<String> goodsUrl) {
@@ -158,16 +182,21 @@ public class GoodsItemActivity extends BaseActivity {
      * 加入购物车
      */
     private void addShopingCar() {
+        if (goodsEntity.getTradeState() != GoodsEntity.GOODS_STATE_ON_SALE) {
+            Toast.makeText(this, "当前商品已下架或正在交易中", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
-        if (collection.contains(goodsEntity.getObjectId())){
+        if (collection.contains(goodsEntity.getObjectId())) {
             collection.remove(goodsEntity.getObjectId());
             Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             collection.add(goodsEntity.getObjectId());
             Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
         }
 
-        sharedPreferences.edit().putStringSet("shop_car",collection).commit();
+        sharedPreferences.edit().putStringSet("shop_car", collection).commit();
     }
 
     /**
@@ -175,15 +204,15 @@ public class GoodsItemActivity extends BaseActivity {
      */
     private void addCollection() {
         Set<String> collection = sharedPreferences.getStringSet("collection", new HashSet<>());
-        if (collection.contains(goodsEntity.getObjectId())){
+        if (collection.contains(goodsEntity.getObjectId())) {
             collection.remove(goodsEntity.getObjectId());
             Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             collection.add(goodsEntity.getObjectId());
             Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
         }
 
-        sharedPreferences.edit().putStringSet("collection",collection).commit();
+        sharedPreferences.edit().putStringSet("collection", collection).commit();
     }
 
     private void submitUserComment() {

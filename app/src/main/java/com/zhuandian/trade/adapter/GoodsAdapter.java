@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,13 +59,14 @@ public class GoodsAdapter extends BaseAdapter<GoodsEntity, BaseViewHolder> {
     ImageView ivDelete;
     @BindView(R.id.iv_goods_sold_out)
     ImageView ivSoldOut;
+    @BindView(R.id.iv_goods_trade)
+    TextView tvOnTrade;
     private LinearLayoutManager layoutManager;
     private OnItemClickListener itemClickListener;
 
     public GoodsAdapter(Context mContext, List<GoodsEntity> mData) {
-        super(mData,mContext);
+        super(mData, mContext);
     }
-
 
 
     @Override
@@ -85,6 +87,7 @@ public class GoodsAdapter extends BaseAdapter<GoodsEntity, BaseViewHolder> {
         rvGoodsImg.setLayoutManager(layoutManager);
         tvBargain.setVisibility((goodsEntity.getTradeType() == GoodsEntity.TRADE_TYPE_BARGAIN && goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_ON_SALE) ? View.VISIBLE : View.GONE);
         ivSoldOut.setVisibility(goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_SOLD_OUT ? View.VISIBLE : View.GONE);
+        tvOnTrade.setVisibility(goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_ON_TRADE ? View.VISIBLE : View.GONE);
         RecyclerItemImgAdapter recyclerItemImgAdapter = new RecyclerItemImgAdapter(mContext, goodsEntity.getGoodsUrl());
         rvGoodsImg.setAdapter(recyclerItemImgAdapter);
         formatTime(goodsEntity.getCreatedAt());
@@ -130,10 +133,18 @@ public class GoodsAdapter extends BaseAdapter<GoodsEntity, BaseViewHolder> {
                             }
                         });
                     }
-                }).setNegativeButton("我再想想", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("彻底删除", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+
+                goodsEntity.delete(goodsEntity.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        Toast.makeText(mContext, "删除成功，请刷新列表...", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
             }
         }).show();
     }
@@ -142,8 +153,6 @@ public class GoodsAdapter extends BaseAdapter<GoodsEntity, BaseViewHolder> {
     public void setItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
-
-
 
 
     public interface OnItemClickListener {

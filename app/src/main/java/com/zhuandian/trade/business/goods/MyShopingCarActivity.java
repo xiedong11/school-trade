@@ -31,6 +31,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * desc :购物车
@@ -142,14 +143,22 @@ public class MyShopingCarActivity extends BaseActivity {
     private void calcTotalPrice() {
         int sum = 0;
         for (GoodsEntity goodsEntity : mDatas) {
+            goodsEntity.setTradeState(GoodsEntity.GOODS_STATE_ON_TRADE);
+            goodsEntity.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    goodsAdapter.notifyDataSetChanged();
+                }
+            });
             sum += Integer.parseInt(goodsEntity.getGoodsPrice());
         }
         new AlertDialog.Builder(this)
-                .setTitle("结算中...")
-                .setMessage("您一共消费" + sum + "元")
+                .setTitle("交易中...")
+                .setMessage("您一共消费" + sum + "元\n请等待卖家确认\n并在线下完成交易")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        finish();
                         dialog.dismiss();
                     }
                 }).show();
