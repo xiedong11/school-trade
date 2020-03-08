@@ -6,23 +6,33 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zhuandian.base.BaseFragment;
+import com.zhuandian.trade.PersonalDataActivity;
 import com.zhuandian.trade.R;
 import com.zhuandian.trade.business.goods.MyCollectionGoodsActivity;
 import com.zhuandian.trade.business.goods.MyCommentGoodsActivity;
 import com.zhuandian.trade.business.goods.MyReleaseGoodsActivity;
 import com.zhuandian.trade.business.goods.MyShopingCarActivity;
+import com.zhuandian.trade.entity.UserEntity;
 import com.zhuandian.trade.utils.PictureSelectorUtils;
 import com.zhuandian.view.CircleImageView;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * desc :
@@ -34,6 +44,8 @@ public class MineFragment extends BaseFragment {
     CircleImageView ivHeader;
     @BindView(R.id.tv_nick_name)
     TextView tvNickName;
+    @BindView(R.id.tv_user_info)
+    TextView tvUserInfo;
 
     @Override
     protected int getLayoutId() {
@@ -42,10 +54,15 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+        Glide.with(actitity).load(userEntity.getHeadImgUrl()).into(ivHeader);
+        tvNickName.setText(userEntity.getNikeName() == null ? userEntity.getUsername() : userEntity.getNikeName());
+        if (userEntity.getUserInfo()!=null){
+            tvUserInfo.setText(userEntity.getUserInfo());
+        }
     }
 
-    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout,R.id.tv_car})
+    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout, R.id.tv_car})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_header:
@@ -63,6 +80,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(actitity, MyCollectionGoodsActivity.class));
                 break;
             case R.id.tv_more_setting:
+                startActivity(new Intent(actitity, PersonalDataActivity.class));
                 break;
             case R.id.tv_logout:
                 break;
@@ -82,9 +100,28 @@ public class MineFragment extends BaseFragment {
                     String imagePath = selectList.get(0).getCompressPath();
                     decodePath2Bitmap(imagePath);
                     //上传文件
+                    uploadImgFile(imagePath);
                 }
             }
         }
+    }
+
+    private void uploadImgFile(String imagePath) {
+        BmobFile file = new BmobFile(new File(imagePath));
+        file.upload(new UploadFileListener() {
+            @Override
+            public void done(BmobException e) {
+
+                UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
+                userEntity.setHeadImgUrl(file.getFileUrl());
+                userEntity.update(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        Toast.makeText(actitity, "头像更新成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     /**
