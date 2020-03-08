@@ -60,4 +60,5 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.google.android:flexbox:1.1.0'
 }

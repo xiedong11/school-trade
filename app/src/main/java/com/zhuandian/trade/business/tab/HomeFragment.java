@@ -1,9 +1,13 @@
 package com.zhuandian.trade.business.tab;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -12,11 +16,18 @@ import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.zhuandian.base.BaseFragment;
 import com.zhuandian.trade.R;
+import com.zhuandian.trade.adapter.GoodsAdapter;
+import com.zhuandian.trade.business.goods.GoodsItemActivity;
+import com.zhuandian.trade.entity.GoodsEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :
@@ -26,6 +37,10 @@ import butterknife.BindView;
 public class HomeFragment extends BaseFragment {
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.rv_list)
+    RecyclerView rvList;
+    private List<GoodsEntity> mDatas = new ArrayList<>();
+    private GoodsAdapter goodsAdapter;
     List<String> images = new ArrayList<String>() {
         {
             add("http://img.zcool.cn/community/0114a856640b6d32f87545731c076a.jpg");
@@ -46,6 +61,7 @@ public class HomeFragment extends BaseFragment {
     };
 
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -54,6 +70,17 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initView() {
         initBanner();
+        goodsAdapter = new GoodsAdapter(actitity, mDatas);
+        rvList.setAdapter(goodsAdapter);
+        rvList.setLayoutManager(new LinearLayoutManager(actitity));
+        goodsAdapter.setItemClickListener(new GoodsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(GoodsEntity entity) {
+                Intent intent = new Intent(actitity, GoodsItemActivity.class);
+                intent.putExtra("goods_entity", entity);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initBanner() {
@@ -75,5 +102,46 @@ public class HomeFragment extends BaseFragment {
                 //Banner 点击事件自己处理
             }
         });
+
+        initList();
+    }
+
+    private void initList() {
+        SharedPreferences sharedPreferences = actitity.getSharedPreferences("goods",Context.MODE_PRIVATE);
+        int likeType = sharedPreferences.getInt("goods_type",0);
+        BmobQuery<GoodsEntity> query = new BmobQuery<>();
+        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.order("-updatedAt");
+        query.setLimit(5);
+        query.addWhereEqualTo("goodsType", likeType);
+        query.findObjects(new FindListener<GoodsEntity>() {
+            @Override
+            public void done(List<GoodsEntity> list, BmobException e) {
+                if (e == null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        mDatas.add(list.get(i));
+                    }
+                    goodsAdapter.notifyDataSetChanged();
+
+                } else {
+                }
+            }
+        });
+    }
+
+    @OnClick({R.id.ll_music, R.id.ll_life, R.id.ll_book, R.id.ll_makeup, R.id.ll_other})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_music:
+                break;
+            case R.id.ll_life:
+                break;
+            case R.id.ll_book:
+                break;
+            case R.id.ll_makeup:
+                break;
+            case R.id.ll_other:
+                break;
+        }
     }
 }

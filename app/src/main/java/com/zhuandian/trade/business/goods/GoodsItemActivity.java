@@ -110,7 +110,12 @@ public class GoodsItemActivity extends BaseActivity {
         commentRecyclewView.setAdapter(userCommentAdapter);
         commentRecyclewView.setLayoutManager(new LinearLayoutManager(this));
         getAllUserComment();  //得到所有参与该动态评论的用户信息和内容
+
+        // 更新猜你喜欢商品tpye
+        sharedPreferences.edit().putInt("goods_type",goodsEntity.getGoodsType()).commit();
     }
+
+
 
     private void initGoodsImg(final List<String> goodsUrl) {
         llImgContainer.removeAllViews();
