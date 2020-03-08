@@ -25,11 +25,12 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_user_desc"
+        android:id="@+id/et_user_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="一句话简短介绍一下自己"
+        android:inputType="textPassword"
+        android:hint="设置新密码"
         android:textSize="15sp" />
 
     <TextView

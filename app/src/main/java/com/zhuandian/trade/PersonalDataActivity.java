@@ -1,6 +1,5 @@
 package com.zhuandian.trade;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -12,7 +11,6 @@ import com.zhuandian.base.BaseActivity;
 import com.zhuandian.trade.entity.UserEntity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -21,8 +19,8 @@ import cn.bmob.v3.listener.UpdateListener;
 public class PersonalDataActivity extends BaseActivity {
     @BindView(R.id.et_nick_name)
     EditText etNickName;
-    @BindView(R.id.et_user_desc)
-    EditText etUserDesc;
+    @BindView(R.id.et_user_password)
+    EditText etUserPassword;
     @BindView(R.id.tv_submit)
     TextView tvSubmit;
     @BindView(R.id.iv_back)
@@ -41,7 +39,7 @@ public class PersonalDataActivity extends BaseActivity {
         tvTitle.setText("修改资料");
         userEntity = BmobUser.getCurrentUser(UserEntity.class);
         etNickName.setText(userEntity.getNikeName() == null ? userEntity.getUsername() : userEntity.getNikeName());
-        etUserDesc.setText(userEntity.getUserInfo() == null ? "" : userEntity.getUserInfo());
+        etUserPassword.setText(userEntity.getUserInfo() == null ? "" : userEntity.getUserInfo());
     }
 
 
@@ -53,9 +51,9 @@ public class PersonalDataActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_submit:
-                if (!TextUtils.isEmpty(etNickName.getText().toString()) || !TextUtils.isEmpty(etUserDesc.getText().toString())) {
+                if (!TextUtils.isEmpty(etNickName.getText().toString()) || !TextUtils.isEmpty(etUserPassword.getText().toString())) {
                     userEntity.setNikeName(etNickName.getText().toString());
-                    userEntity.setUserInfo(etUserDesc.getText().toString());
+                    userEntity.setPassword(etUserPassword.getText().toString());
                     userEntity.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
