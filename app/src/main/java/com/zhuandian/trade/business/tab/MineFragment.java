@@ -19,6 +19,7 @@ import com.zhuandian.trade.business.goods.MyCollectionGoodsActivity;
 import com.zhuandian.trade.business.goods.MyCommentGoodsActivity;
 import com.zhuandian.trade.business.goods.MyReleaseGoodsActivity;
 import com.zhuandian.trade.business.goods.MyShopingCarActivity;
+import com.zhuandian.trade.business.goods.MyTradeAcitivity;
 import com.zhuandian.trade.business.login.LoginActivity;
 import com.zhuandian.trade.entity.UserEntity;
 import com.zhuandian.trade.utils.PictureSelectorUtils;
@@ -63,11 +64,14 @@ public class MineFragment extends BaseFragment {
         tvUserSchool.setText(userEntity.getUserSchool());
     }
 
-    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout, R.id.tv_car})
+    @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release,R.id.tv_my_trade, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout, R.id.tv_car})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_header:
                 PictureSelectorUtils.selectImg(PictureSelector.create(this), 1);
+                break;
+            case R.id.tv_my_trade:
+                startActivity(new Intent(actitity, MyTradeAcitivity.class));
                 break;
             case R.id.tv_nick_name:
                 break;

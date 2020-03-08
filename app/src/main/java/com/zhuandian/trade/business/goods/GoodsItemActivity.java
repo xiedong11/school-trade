@@ -182,21 +182,24 @@ public class GoodsItemActivity extends BaseActivity {
      * 加入购物车
      */
     private void addShopingCar() {
-        if (goodsEntity.getTradeState() != GoodsEntity.GOODS_STATE_ON_SALE) {
+        if (goodsEntity.getTradeState() == GoodsEntity.GOODS_STATE_ON_SALE) {
+            Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
+            if (collection.contains(goodsEntity.getObjectId())) {
+                collection.remove(goodsEntity.getObjectId());
+                Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
+            } else {
+                collection.add(goodsEntity.getObjectId());
+                Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+            }
+
+            sharedPreferences.edit().putStringSet("shop_car", collection).commit();
+
+
+        }else {
             Toast.makeText(this, "当前商品已下架或正在交易中", Toast.LENGTH_SHORT).show();
-            return;
         }
 
-        Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
-        if (collection.contains(goodsEntity.getObjectId())) {
-            collection.remove(goodsEntity.getObjectId());
-            Toast.makeText(this, "移除成功", Toast.LENGTH_SHORT).show();
-        } else {
-            collection.add(goodsEntity.getObjectId());
-            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
-        }
 
-        sharedPreferences.edit().putStringSet("shop_car", collection).commit();
     }
 
     /**

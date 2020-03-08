@@ -102,6 +102,15 @@
         android:layout_marginRight="10dp" />
 
     <TextView
+        android:id="@+id/tv_my_trade"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="我交易过的" />
+
+    <TextView
         android:id="@+id/tv_more_setting"
         android:layout_width="match_parent"
         android:layout_height="50dp"

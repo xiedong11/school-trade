@@ -1,15 +1,12 @@
 package com.zhuandian.trade.business.goods;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,14 +28,14 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * desc :购物车
+ * desc :我交易过的
  * author：xiedong
- * date：2020/03/07
+ * date：2020/03/08
  */
-public class MyShopingCarActivity extends BaseActivity {
+public class MyTradeAcitivity extends BaseActivity {
+
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -55,18 +52,18 @@ public class MyShopingCarActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_shoping_car;
+        return R.layout.activity_my_trade_acitivity;
     }
 
     @Override
     protected void setUpView() {
-        tvTitle.setText("购物车");
+        tvTitle.setText("我交易过的");
         goodsAdapter = new GoodsAdapter(this, mDatas);
         brvList.setRecyclerViewAdapter(goodsAdapter);
         goodsAdapter.setItemClickListener(new GoodsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(GoodsEntity entity) {
-                Intent intent = new Intent(MyShopingCarActivity.this, GoodsItemActivity.class);
+                Intent intent = new Intent(MyTradeAcitivity.this, GoodsItemActivity.class);
                 intent.putExtra("goods_entity", entity);
                 startActivity(intent);
             }
@@ -100,13 +97,13 @@ public class MyShopingCarActivity extends BaseActivity {
     private void loadDatas() {
         currentCount = currentCount + 10;
         SharedPreferences sharedPreferences = getSharedPreferences("goods", Context.MODE_PRIVATE);
-        Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
+        Set<String> collection = sharedPreferences.getStringSet("trade", new HashSet<>());
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.order("-updatedAt");
         query.setLimit(10);
-        query.addWhereContainedIn("objectId", collection);
+        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
+        query.addWhereContainedIn("objectId",collection);
         query.setSkip(currentCount);
         //这里查询规则有点绕，备注一下，如果userEntity不为null代表需要检索指定用户发布的二手商品信息，如果为null则检索全部
         //如果userEntity为当前登录用户，则需要有对商品下架的权限，否则只有查看权限
@@ -127,44 +124,8 @@ public class MyShopingCarActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_total})
-    public void onViewClicked(View view) {
-
-        switch (view.getId()) {
-            case R.id.tv_total:
-                calcTotalPrice();
-                break;
-            case R.id.iv_back:
-                finish();
-                break;
-        }
-    }
-
-    private void calcTotalPrice() {
-        SharedPreferences sharedPreferences = getSharedPreferences("goods", Context.MODE_PRIVATE);
-        Set<String> collection = sharedPreferences.getStringSet("trade", new HashSet<>()); //存储我交易过的记录
-        int sum = 0;
-        for (GoodsEntity goodsEntity : mDatas) {
-            collection.add(goodsEntity.getObjectId());
-            goodsEntity.setTradeState(GoodsEntity.GOODS_STATE_ON_TRADE);
-            goodsEntity.update(new UpdateListener() {
-                @Override
-                public void done(BmobException e) {
-                    goodsAdapter.notifyDataSetChanged();
-                }
-            });
-            sum += Integer.parseInt(goodsEntity.getGoodsPrice());
-        }
-        sharedPreferences.edit().putStringSet("trade",collection).commit();
-        new AlertDialog.Builder(this)
-                .setTitle("交易中...")
-                .setMessage("您一共消费" + sum + "元\n请等待卖家确认\n并在线下完成交易")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        dialog.dismiss();
-                    }
-                }).show();
+    @OnClick(R.id.iv_back)
+    public void onViewClicked() {
+        finish();
     }
 }
