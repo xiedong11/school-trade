@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.zhuandian.trade.R;
 import com.zhuandian.trade.adapter.GoodsAdapter;
 import com.zhuandian.trade.business.goods.GoodsFilterActivity;
 import com.zhuandian.trade.business.goods.GoodsItemActivity;
+import com.zhuandian.trade.business.goods.GoodsSearchActivity;
 import com.zhuandian.trade.entity.GoodsEntity;
 
 import java.util.ArrayList;
@@ -40,6 +42,8 @@ public class HomeFragment extends BaseFragment {
     Banner banner;
     @BindView(R.id.rv_list)
     RecyclerView rvList;
+    @BindView(R.id.et_key_word)
+    EditText etKeyWord;
     private List<GoodsEntity> mDatas = new ArrayList<>();
     private GoodsAdapter goodsAdapter;
     List<String> images = new ArrayList<String>() {
@@ -129,7 +133,7 @@ public class HomeFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.ll_music, R.id.ll_life, R.id.ll_book, R.id.ll_makeup, R.id.ll_other})
+    @OnClick({R.id.ll_music, R.id.ll_life, R.id.ll_book, R.id.ll_makeup, R.id.ll_other, R.id.tv_sure})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_music:
@@ -146,6 +150,11 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.ll_other:
                 go2GoodsFilterActivity(1, "杂七杂八");
+                break;
+            case R.id.tv_sure:
+                Intent intent = new Intent(actitity, GoodsSearchActivity.class);
+                intent.putExtra("keyWord", etKeyWord.getText().toString());
+                startActivity(intent);
                 break;
         }
     }
