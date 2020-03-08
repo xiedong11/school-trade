@@ -19,6 +19,7 @@ import com.zhuandian.trade.business.goods.MyCollectionGoodsActivity;
 import com.zhuandian.trade.business.goods.MyCommentGoodsActivity;
 import com.zhuandian.trade.business.goods.MyReleaseGoodsActivity;
 import com.zhuandian.trade.business.goods.MyShopingCarActivity;
+import com.zhuandian.trade.business.login.LoginActivity;
 import com.zhuandian.trade.entity.UserEntity;
 import com.zhuandian.trade.utils.PictureSelectorUtils;
 import com.zhuandian.view.CircleImageView;
@@ -83,6 +84,9 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(actitity, PersonalDataActivity.class));
                 break;
             case R.id.tv_logout:
+                startActivity(new Intent(actitity, LoginActivity.class));
+                BmobUser.logOut();
+                actitity.finish();
                 break;
             case R.id.tv_car:
                 startActivity(new Intent(actitity, MyShopingCarActivity.class));
