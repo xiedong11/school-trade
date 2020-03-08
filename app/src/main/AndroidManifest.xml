@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.goods.GoodsSearchActivity"></activity>
+        <activity android:name=".business.ReleaseMessageActivity"></activity>
+        <activity android:name=".business.goods.GoodsSearchActivity" />
         <activity android:name=".business.goods.GoodsFilterActivity" />
         <activity android:name=".PersonalDataActivity" />
         <activity android:name=".business.goods.MyShopingCarActivity" />
@@ -33,8 +34,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan"
-            android:theme="@style/HomePageTheme">
+            android:theme="@style/HomePageTheme"
+            android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

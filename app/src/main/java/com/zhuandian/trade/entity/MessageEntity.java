@@ -11,6 +11,15 @@ public class MessageEntity extends BmobObject {
     private String content;
     private String title;
     private int type;   //1.失误招领  2.寻物启事，3，系统消息
+    private UserEntity userEntity;
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
 
     public String getContent() {
         return content;

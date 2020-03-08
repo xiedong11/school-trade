@@ -1,5 +1,6 @@
 package com.zhuandian.trade.business.tab;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.zhuandian.base.BaseFragment;
 import com.zhuandian.trade.R;
 import com.zhuandian.trade.adapter.MessageAdapter;
+import com.zhuandian.trade.business.ReleaseMessageActivity;
 import com.zhuandian.trade.entity.MessageEntity;
 import com.zhuandian.trade.utils.BaseRecyclerView;
 
@@ -33,6 +35,8 @@ public class MessageFragment extends BaseFragment {
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     private List<MessageEntity> mDatas = new ArrayList<>();
     private MessageAdapter messageAdapter;
     private int currentCount = -10;
@@ -47,6 +51,14 @@ public class MessageFragment extends BaseFragment {
     protected void initView() {
         ivBack.setVisibility(View.GONE);
         tvTitle.setText("消息中心");
+        tvRight.setVisibility(View.VISIBLE);
+        tvRight.setText("发布");
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(actitity, ReleaseMessageActivity.class));
+            }
+        });
         messageAdapter = new MessageAdapter(mDatas, actitity);
         brvGoodsList.setRecyclerViewAdapter(messageAdapter);
         loadDatas();
