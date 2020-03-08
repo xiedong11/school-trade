@@ -106,6 +106,7 @@ public class MyCollectionGoodsActivity extends BaseActivity {
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         query.order("-updatedAt");
         query.setLimit(10);
+        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.addWhereContainedIn("objectId",collection);
         query.setSkip(currentCount);
         //这里查询规则有点绕，备注一下，如果userEntity不为null代表需要检索指定用户发布的二手商品信息，如果为null则检索全部

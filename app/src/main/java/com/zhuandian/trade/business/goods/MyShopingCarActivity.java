@@ -28,6 +28,7 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
@@ -101,6 +102,7 @@ public class MyShopingCarActivity extends BaseActivity {
         Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.order("-updatedAt");
         query.setLimit(10);
         query.addWhereContainedIn("objectId", collection);

@@ -104,6 +104,7 @@ public class GoodsFragment extends BaseFragment {
         query.include("goodsOwner");// 查出发布人信息
         query.setLimit(10);
         query.setSkip(currentCount);
+        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         //这里查询规则有点绕，备注一下，如果userEntity不为null代表需要检索指定用户发布的二手商品信息，如果为null则检索全部
         //如果userEntity为当前登录用户，则需要有对商品下架的权限，否则只有查看权限
         if (userEntity != null) {

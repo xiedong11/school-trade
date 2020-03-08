@@ -100,6 +100,7 @@ public class MyCommentGoodsActivity extends BaseActivity {
         query.include("goodsOwner");// 查出发布人信息
         query.setLimit(10);
         query.setSkip(currentCount);
+        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.include("userEntity,goodsEntity.userEntity");
         query.findObjects(new FindListener<GoodsCommentEntity>() {
             @Override

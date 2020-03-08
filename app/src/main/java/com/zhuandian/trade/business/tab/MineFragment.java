@@ -45,8 +45,8 @@ public class MineFragment extends BaseFragment {
     CircleImageView ivHeader;
     @BindView(R.id.tv_nick_name)
     TextView tvNickName;
-    @BindView(R.id.tv_user_info)
-    TextView tvUserInfo;
+    @BindView(R.id.tv_user_school)
+    TextView tvUserSchool;
 
     @Override
     protected int getLayoutId() {
@@ -56,11 +56,11 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initView() {
         UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
-        Glide.with(actitity).load(userEntity.getHeadImgUrl()).into(ivHeader);
-        tvNickName.setText(userEntity.getNikeName() == null ? userEntity.getUsername() : userEntity.getNikeName());
-        if (userEntity.getUserInfo()!=null){
-            tvUserInfo.setText(userEntity.getUserInfo());
+        if (userEntity.getHeadImgUrl()!=null) {
+            Glide.with(actitity).load(userEntity.getHeadImgUrl()).into(ivHeader);
         }
+        tvNickName.setText(userEntity.getNikeName() == null ? userEntity.getUsername() : userEntity.getNikeName());
+        tvUserSchool.setText(userEntity.getUserSchool());
     }
 
     @OnClick({R.id.iv_header, R.id.tv_nick_name, R.id.tv_my_release, R.id.tv_my_comment, R.id.tv_my_collect, R.id.tv_more_setting, R.id.tv_logout, R.id.tv_car})
