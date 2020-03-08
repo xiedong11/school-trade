@@ -46,6 +46,10 @@ public class GoodsFragment extends BaseFragment {
     private UserEntity userEntity;
     private int currentCount = -10;
     private LinearLayoutManager linearLayoutManager;
+    private boolean sortByPriceDown = true;
+    private boolean sortByTimeDown = true;
+    private int sortType = 1; //1,时间，2，价格
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_goods;
@@ -73,14 +77,12 @@ public class GoodsFragment extends BaseFragment {
         loadDatas();
         initRefreshListener();
     }
+
     private void initRefreshListener() {
         brvGoodsList.setRefreshListener(new BaseRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                currentCount = -10; //重新置位
-                mDatas.clear();
-                goodsAdapter.notifyDataSetChanged();
-                loadDatas();
+                refreshList();
 
             }
         });
@@ -94,13 +96,21 @@ public class GoodsFragment extends BaseFragment {
 
     }
 
+    private void refreshList() {
+        currentCount = -10; //重新置位
+        mDatas.clear();
+        goodsAdapter.notifyDataSetChanged();
+        loadDatas();
+    }
 
 
     private void loadDatas() {
         currentCount = currentCount + 10;
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.order("-updatedAt");
+        String sortByTime = sortByTimeDown ? "-createdAt" : "createdAt";
+        String sortByPrice = sortByPriceDown ? "goodsPrice" : "-goodsPrice";
+        query.order(sortType == 1 ? sortByTime : sortByPrice);
         query.include("goodsOwner");// 查出发布人信息
         query.setLimit(10);
         query.setSkip(currentCount);
@@ -126,11 +136,21 @@ public class GoodsFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.iv_new_release})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.iv_new_release, R.id.tv_sort_price, R.id.tv_sort_time})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_new_release:
                 startActivity(new Intent(actitity, NewReleaseActivity.class));
+                break;
+            case R.id.tv_sort_price:
+                sortByPriceDown = !sortByPriceDown;
+                sortType = 2;
+                refreshList();
+                break;
+            case R.id.tv_sort_time:
+                sortByTimeDown = !sortByTimeDown;
+                sortType = 1;
+                refreshList();
                 break;
         }
     }

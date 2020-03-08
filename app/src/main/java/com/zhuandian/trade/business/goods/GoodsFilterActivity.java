@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,9 @@ public class GoodsFilterActivity extends BaseActivity {
     private int currentCount = -10;
     private String title;
     private int goodsType;
+    private boolean sortByPriceDown = true;
+    private boolean sortByTimeDown = true;
+    private int sortType = 1; //1,时间，2，价格
 
 
     @Override
@@ -52,7 +56,7 @@ public class GoodsFilterActivity extends BaseActivity {
     @Override
     protected void setUpView() {
         title = getIntent().getStringExtra("title");
-        goodsType = getIntent().getIntExtra("goodsType",0);
+        goodsType = getIntent().getIntExtra("goodsType", 0);
         tvTitle.setText(title);
         goodsAdapter = new GoodsAdapter(this, mDatas);
         brvList.setRecyclerViewAdapter(goodsAdapter);
@@ -72,10 +76,7 @@ public class GoodsFilterActivity extends BaseActivity {
         brvList.setRefreshListener(new BaseRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                currentCount = -10; //重新置位
-                mDatas.clear();
-                goodsAdapter.notifyDataSetChanged();
-                loadDatas();
+                refreshList();
 
             }
         });
@@ -89,12 +90,21 @@ public class GoodsFilterActivity extends BaseActivity {
 
     }
 
+    private void refreshList() {
+        currentCount = -10; //重新置位
+        mDatas.clear();
+        goodsAdapter.notifyDataSetChanged();
+        loadDatas();
+    }
+
 
     private void loadDatas() {
         currentCount = currentCount + 10;
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.order("-updatedAt");
+        String sortByTime = sortByTimeDown ? "-createdAt" : "createdAt";
+        String sortByPrice = sortByPriceDown?"goodsPrice":"-goodsPrice";
+        query.order(sortType == 1 ? sortByTime : sortByPrice);
         query.setLimit(10);
         query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.addWhereEqualTo("goodsType", goodsType);
@@ -118,8 +128,24 @@ public class GoodsFilterActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.iv_back, R.id.tv_sort_time, R.id.tv_sort_price})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.tv_sort_price:
+                sortType = 2;
+                sortByPriceDown = !sortByPriceDown;
+                refreshList();
+                break;
+            case R.id.tv_sort_time:
+                sortType = 1;
+                sortByTimeDown = !sortByTimeDown;
+                refreshList();
+                break;
+
+        }
+
     }
 }

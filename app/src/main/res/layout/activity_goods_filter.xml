@@ -8,6 +8,28 @@
 
     <include layout="@layout/layout_top_bar" />
 
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tv_sort_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="价格排序" />
+
+        <TextView
+            android:id="@+id/tv_sort_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="时间排序" />
+    </LinearLayout>
+
     <com.zhuandian.trade.utils.BaseRecyclerView
         android:id="@+id/brv_list"
         android:layout_width="match_parent"
