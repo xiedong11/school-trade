@@ -15,6 +15,7 @@
 - 4.方便开发者进行二次开发定制
 
 <img src = "https://github.com/xiedong11/school-trade/blob/master/img/1.jpg" width="375" alt="项目截图"/>
+
 ![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/1.jpg)
 ![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/2.jpg)
 ![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/3.jpg)
