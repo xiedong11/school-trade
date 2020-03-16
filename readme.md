@@ -16,12 +16,16 @@
 
 <img src = "https://github.com/xiedong11/school-trade/blob/master/img/1.jpg" width="375" alt="项目截图"/>
 
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/1.jpg)
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/2.jpg)
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/3.jpg)
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/4.jpg)
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/5.jpg)
-![项目截图](https://github.com/xiedong11/school-trade/blob/master/img/6.jpg)
+<img src = "https://github.com/xiedong11/school-trade/blob/master/img/2.jpg" width="375" alt="项目截图"/>
+
+<img src = "https://github.com/xiedong11/school-trade/blob/master/img/3.jpg" width="375" alt="项目截图"/>
+
+<img src = "https://github.com/xiedong11/school-trade/blob/master/img/4.jpg" width="375" alt="项目截图"/>
+
+<img src = "https://github.com/xiedong11/school-trade/blob/master/img/5.jpg" width="375" alt="项目截图"/>
+
+<img src = "https://github.com/xiedong11/school-trade/blob/master/img/6.jpg" width="375" alt="项目截图"/>
+
 
 **转点软件工作室出品 xiedong11@aliyun.com**
 **QQ技术支持群：850480440**
