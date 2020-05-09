@@ -106,6 +106,7 @@ public class MyShopingCarActivity extends BaseActivity {
         query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.order("-updatedAt");
         query.setLimit(10);
+        query.include("goodsOwner");// 查出发布人信息
         query.addWhereContainedIn("objectId", collection);
         query.setSkip(currentCount);
         //这里查询规则有点绕，备注一下，如果userEntity不为null代表需要检索指定用户发布的二手商品信息，如果为null则检索全部

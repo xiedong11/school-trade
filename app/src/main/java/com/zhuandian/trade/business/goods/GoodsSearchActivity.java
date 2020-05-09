@@ -98,6 +98,7 @@ public class GoodsSearchActivity extends BaseActivity {
         String sortByPrice = sortByPriceDown ? "goodsPrice" : "-goodsPrice";
         query.order(sortType == 1 ? sortByTime : sortByPrice);
         query.setLimit(10);
+        query.include("goodsOwner");// 查出发布人信息
         query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.setSkip(currentCount);
         //这里查询规则有点绕，备注一下，如果userEntity不为null代表需要检索指定用户发布的二手商品信息，如果为null则检索全部

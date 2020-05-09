@@ -117,6 +117,7 @@ public class HomeFragment extends BaseFragment {
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         query.order("-updatedAt");
         query.setLimit(5);
+        query.include("goodsOwner");// 查出发布人信息
         query.addWhereEqualTo("goodsType", likeType);
         query.findObjects(new FindListener<GoodsEntity>() {
             @Override

@@ -106,6 +106,7 @@ public class GoodsFilterActivity extends BaseActivity {
         String sortByPrice = sortByPriceDown?"goodsPrice":"-goodsPrice";
         query.order(sortType == 1 ? sortByTime : sortByPrice);
         query.setLimit(10);
+        query.include("goodsOwner");// 查出发布人信息
         query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.addWhereEqualTo("goodsType", goodsType);
         query.setSkip(currentCount);

@@ -102,6 +102,7 @@ public class MyTradeAcitivity extends BaseActivity {
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
         query.order("-updatedAt");
         query.setLimit(10);
+        query.include("goodsOwner");// 查出发布人信息
         query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.addWhereContainedIn("objectId",collection);
         query.setSkip(currentCount);
