@@ -261,7 +261,7 @@ public class GoodsItemActivity extends BaseActivity {
         //用此方式可以构造一个BmobPointer对象。只需要设置objectId就行
         GoodsEntity post = new GoodsEntity();
         post.setObjectId(goodsEntity.getObjectId());   //得到当前动态的Id号，
-        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         query.order("updatedAt");
         query.addWhereEqualTo("goodsEntity", new BmobPointer(post));
         //希望同时查询该评论的发布者的信息，以及该帖子的作者的信息，这里用到上面`include`的并列对象查询和内嵌对象的查询

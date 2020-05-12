@@ -159,7 +159,7 @@ public class MyShopingCarActivity extends BaseActivity {
         sharedPreferences.edit().putStringSet("trade",collection).commit();
         new AlertDialog.Builder(this)
                 .setTitle("交易中...")
-                .setMessage("您一共消费" + sum + "元\n请等待卖家确认\n并在线下完成交易")
+                .setMessage("您一共消费" + sum + "元\n请等待卖家确认\n并在线下完成交易\n卖家联系方式："+mDatas.get(0).getGoodsOwner().getMobilePhoneNumber())
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

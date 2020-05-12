@@ -48,10 +48,10 @@ public class HomeFragment extends BaseFragment {
     private GoodsAdapter goodsAdapter;
     List<String> images = new ArrayList<String>() {
         {
-            add("http://img.zcool.cn/community/0114a856640b6d32f87545731c076a.jpg");
-            add("http://img.zcool.cn/community/0166c756e1427432f875520f7cc838.jpg");
-            add("http://img.zcool.cn/community/018fdb56e1428632f875520f7b67cb.jpg");
-            add("http://img.zcool.cn/community/01c8dc56e1428e6ac72531cbaa5f2c.jpg");
+            add("http://img2.zhuandian.site/2020/05/07/6b9f63b8408b941a8064b971eaf5bfec.jpg");
+            add("http://img2.zhuandian.site/2020/05/07/f1e60af54054fc3480333d2c0facf71d.jpg");
+            add("http://img2.zhuandian.site/2020/05/07/40c0f8c7404838fd80bbbaec273f544e.jpg");
+            add("http://img2.zhuandian.site/2020/05/07/fe79204340be017780ea2998dab44a15.jpg");
         }
     };
 

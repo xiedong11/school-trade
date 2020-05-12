@@ -67,6 +67,7 @@ public class MessageItemAcitivity extends BaseActivity {
     private MessageEntity messageEntity;
     private List<MessageCommentEntity> commentDatas = new ArrayList<>();
     private MessageCommentAdapter userCommentAdapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_message_item_acitivity;
@@ -75,15 +76,26 @@ public class MessageItemAcitivity extends BaseActivity {
     @Override
     protected void setUpView() {
         messageEntity = (MessageEntity) getIntent().getSerializableExtra("message_entity");
-        tvTitle.setText("商品详情");
+        tvTitle.setText("消息详情");
+        tvMessageTitle.setText(messageEntity.getTitle());
         tvContent.setText(messageEntity.getContent());
-       tvTime.setText(messageEntity.getCreatedAt());
+        tvTime.setText(messageEntity.getCreatedAt());
+        switch (messageEntity.getType()) {
+            case 1:
+                tvType.setText("失物招领");
+                break;
+            case 2:
+                tvType.setText("寻物启事");
+                break;
+            case 3:
+                tvType.setText("系统消息");
+                break;
+        }
         userCommentAdapter = new MessageCommentAdapter(commentDatas, this);
         commentRecyclewView.setAdapter(userCommentAdapter);
         commentRecyclewView.setLayoutManager(new LinearLayoutManager(this));
         getAllUserComment();  //得到所有参与该动态评论的用户信息和内容
     }
-
 
 
     /**
@@ -116,6 +128,7 @@ public class MessageItemAcitivity extends BaseActivity {
 
 
     }
+
     @OnClick({R.id.iv_back, R.id.submit_comment, R.id.fab})
     public void onViewClicked(View view) {
         switch (view.getId()) {

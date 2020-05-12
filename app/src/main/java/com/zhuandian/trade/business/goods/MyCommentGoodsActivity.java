@@ -95,26 +95,18 @@ public class MyCommentGoodsActivity extends BaseActivity {
     private void loadDatas() {
         currentCount = currentCount + 10;
         BmobQuery<GoodsCommentEntity> query = new BmobQuery<>();
-        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ONLY);
         query.order("-updatedAt");
-        query.include("goodsOwner");// 查出发布人信息
+        query.include("userEntity,goodsEntity.goodsOwner");
         query.setLimit(10);
         query.setSkip(currentCount);
-        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
-        query.include("userEntity,goodsEntity.userEntity");
+//        query.include("userEntity,goodsEntity.userEntity");
         query.findObjects(new FindListener<GoodsCommentEntity>() {
             @Override
             public void done(List<GoodsCommentEntity> list, BmobException e) {
                 if (e == null) {
                     for (int i = 0; i < list.size(); i++) {
-                        boolean isHave = false;
-                        for (GoodsEntity goodsEntity : mDatas) {
-                            if (goodsEntity.getObjectId().equals(list.get(i).getGoodsEntity().getObjectId())) {
-                                isHave = true;
-                                break;
-                            }
-                        }
-                        if (!isHave) {
+                            if (BmobUser.getCurrentUser(UserEntity.class).getObjectId().equals(list.get(i).getUserEntity().getObjectId())) {
                             mDatas.add(list.get(i).getGoodsEntity());
                         }
 
