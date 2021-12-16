@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +39,8 @@ import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/03
+ *
+ * date：
  */
 public class MineFragment extends BaseFragment {
     @BindView(R.id.iv_header)
@@ -48,6 +49,10 @@ public class MineFragment extends BaseFragment {
     TextView tvNickName;
     @BindView(R.id.tv_user_school)
     TextView tvUserSchool;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected int getLayoutId() {
@@ -56,6 +61,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        ivBack.setVisibility(View.GONE);
+        tvTitle.setText("个人中心");
         UserEntity userEntity = BmobUser.getCurrentUser(UserEntity.class);
         if (userEntity.getHeadImgUrl()!=null) {
             Glide.with(actitity).load(userEntity.getHeadImgUrl()).into(ivHeader);

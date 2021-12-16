@@ -29,8 +29,8 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :我评论的
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class MyCommentGoodsActivity extends BaseActivity {
 

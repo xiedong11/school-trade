@@ -33,8 +33,8 @@ import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/05
+ *
+ * date：
  */
 public class GoodsAdapter extends BaseAdapter<GoodsEntity, BaseViewHolder> {
     @BindView(R.id.civ_header)

@@ -27,8 +27,8 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :我发布的
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class MyReleaseGoodsActivity extends BaseActivity {
 

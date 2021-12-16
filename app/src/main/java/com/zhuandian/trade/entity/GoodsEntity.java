@@ -8,8 +8,8 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/05
+ *
+ * date：
  */
 public class GoodsEntity extends BmobObject implements Serializable {
     public static final int GOODS_TYPYE_DAILY_USE = 0; //日常用品

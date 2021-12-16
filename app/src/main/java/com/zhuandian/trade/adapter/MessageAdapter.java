@@ -24,8 +24,8 @@ import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class MessageAdapter extends BaseAdapter<MessageEntity, BaseViewHolder> {
     @BindView(R.id.tv_title)

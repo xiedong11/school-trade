@@ -4,8 +4,8 @@ import cn.bmob.v3.BmobUser;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/04
+ *
+ *
  */
 public class UserEntity extends BmobUser {
     private String nikeName;

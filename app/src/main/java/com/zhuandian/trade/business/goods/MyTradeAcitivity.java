@@ -31,8 +31,8 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :我交易过的
- * author：xiedong
- * date：2020/03/08
+ *
+ * date：
  */
 public class MyTradeAcitivity extends BaseActivity {
 

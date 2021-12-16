@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class GoodsCommentAdapter extends BaseAdapter<GoodsCommentEntity, BaseViewHolder> {
 

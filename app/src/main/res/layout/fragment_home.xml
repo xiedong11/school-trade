@@ -34,7 +34,8 @@
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:visibility="gone" />
 
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
@@ -42,118 +43,103 @@
             android:gravity="center"
             app:alignContent="stretch"
             app:alignItems="center"
-            app:flexWrap="wrap"
-            app:justifyContent="space_between">
+            app:flexWrap="wrap">
 
             <LinearLayout
                 android:id="@+id/ll_music"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:background="#FCFCFC"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/icon_audio"
-                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect"
+                    android:gravity="center"
+                    android:padding="15dp"
                     android:text="电子设备" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_life"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_hotel"
-                    android:tint="#4CAF50" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect"
+                    android:gravity="center"
+                    android:padding="15dp"
                     android:text="日常生活" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_book"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_camera"
-                    android:tint="#f00" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect"
+                    android:gravity="center"
+                    android:padding="15dp"
                     android:text="资料书籍" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_makeup"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
+                android:layout_margin="5dp"
+
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/head" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect"
+                    android:gravity="center"
+                    android:padding="15dp"
                     android:text="美妆洗化" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_other"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_video_play"
-                    android:tint="#FF9800" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect"
+                    android:gravity="center"
+                    android:padding="15dp"
                     android:text="杂七杂八" />
             </LinearLayout>
         </com.google.android.flexbox.FlexboxLayout>
@@ -161,7 +147,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="猜你喜欢"
             android:textColor="#000"

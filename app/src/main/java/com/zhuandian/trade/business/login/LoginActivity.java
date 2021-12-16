@@ -61,6 +61,7 @@ public class LoginActivity   extends BaseActivity {
         if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(passWord)) {
             Toast.makeText(this, "请完善登陆信息...", Toast.LENGTH_SHORT).show();
         } else {
+            Toast.makeText(LoginActivity.this, "登陆中...", Toast.LENGTH_SHORT).show();
             UserEntity userEntity = new UserEntity();
             userEntity.setUsername(userName);
             userEntity.setPassword(passWord);

@@ -35,8 +35,8 @@ import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * desc :购物车
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class MyShopingCarActivity extends BaseActivity {
 

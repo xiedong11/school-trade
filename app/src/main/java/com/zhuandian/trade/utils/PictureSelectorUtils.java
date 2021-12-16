@@ -6,8 +6,8 @@ import com.luck.picture.lib.config.PictureMimeType;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/05
+ *
+ * date：
  */
 public class PictureSelectorUtils {
     /**

@@ -4,8 +4,8 @@ import cn.bmob.v3.BmobObject;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/07
+ *
+ * date：
  */
 public class MessageCommentEntity extends BmobObject {
     private String content;

@@ -11,10 +11,10 @@
         android:id="@+id/tab_goods"
         android:icon="@drawable/ic_hotel"
         android:title="商品" />
-    <item
-        android:id="@+id/tab_message"
-        android:icon="@drawable/ic_view"
-        android:title="消息" />
+<!--    <item-->
+<!--        android:id="@+id/tab_message"-->
+<!--        android:icon="@drawable/ic_view"-->
+<!--        android:title="消息" />-->
 
     <item
         android:id="@+id/tab_my"

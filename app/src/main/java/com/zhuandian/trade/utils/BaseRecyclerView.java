@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * desc :封装RecyclerView
- * author：xiedong
+ *
  * data：2020/03/1
  */
 

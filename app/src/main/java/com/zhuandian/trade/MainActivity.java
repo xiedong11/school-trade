@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
     BottomNavigationView tabBottom;
     public static final int PAGE_HOME = 0;
     public static final int PAGE_GOODS = 1;
-    public static final int PAGE_MESSAGE = 2;
+//    public static final int PAGE_MESSAGE = 2;
     public static final int PAGE_MY = 3;
 
     @Override
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new GoodsFragment());
-        fragmentList.add(new MessageFragment());
+//        fragmentList.add(new MessageFragment());
         fragmentList.add(new MineFragment());
         vpHome.setAdapter(new HomePageAdapter(getSupportFragmentManager(),fragmentList));
         vpHome.setOffscreenPageLimit(4);
@@ -71,9 +71,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.tab_goods:
                         vpHome.setCurrentItem(PAGE_GOODS);
                         break;
-                    case R.id.tab_message:
-                        vpHome.setCurrentItem(PAGE_MESSAGE);
-                        break;
+//                    case R.id.tab_message:
+//                        vpHome.setCurrentItem(PAGE_MESSAGE);
+//                        break;
                     case R.id.tab_my:
                         vpHome.setCurrentItem(PAGE_MY);
                         break;

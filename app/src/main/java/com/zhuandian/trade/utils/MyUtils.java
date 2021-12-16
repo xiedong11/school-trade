@@ -6,8 +6,8 @@ import java.util.Date;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/05
+ *
+ * date：
  */
 public class MyUtils {
     public static String currentTime() {

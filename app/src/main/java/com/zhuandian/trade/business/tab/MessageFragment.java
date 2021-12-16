@@ -24,8 +24,8 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/03
+ *
+ * date：
  */
 public class MessageFragment extends BaseFragment {
 

@@ -38,14 +38,18 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_new_release"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+
+    <TextView
+        android:id="@+id/tv_new_release"
+        android:background="@drawable/shape_flea_market_item_is_bargain_bg"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_camera"
-        android:tint="@color/colorPrimary" />
+        android:layout_width="50dp"
+        android:text="发布"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_height="50dp"/>
+
 </RelativeLayout>

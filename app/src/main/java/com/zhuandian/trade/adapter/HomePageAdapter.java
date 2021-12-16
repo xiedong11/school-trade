@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/03
+ *
+ * date：
  */
 public class HomePageAdapter extends FragmentPagerAdapter {
     List<BaseFragment> fragments;

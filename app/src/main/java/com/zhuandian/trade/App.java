@@ -6,13 +6,13 @@ import cn.bmob.v3.Bmob;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/03
+ *
+ * date：
  */
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(this, "e8d84029fd228ea10f2c332a807073f2");
+        Bmob.initialize(this, "1ae0b48041931e180f74a51c5b6e2eac");
     }
 }

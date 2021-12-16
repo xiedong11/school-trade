@@ -32,8 +32,8 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * desc :
- * author：xiedong
- * date：2020/03/03
+ *
+ * date：
  */
 public class GoodsFragment extends BaseFragment {
     @BindView(R.id.brv_list)
@@ -136,10 +136,10 @@ public class GoodsFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.iv_new_release, R.id.tv_sort_price, R.id.tv_sort_time})
+    @OnClick({R.id.tv_new_release, R.id.tv_sort_price, R.id.tv_sort_time})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_new_release:
+            case R.id.tv_new_release:
                 startActivity(new Intent(actitity, NewReleaseActivity.class));
                 break;
             case R.id.tv_sort_price:
