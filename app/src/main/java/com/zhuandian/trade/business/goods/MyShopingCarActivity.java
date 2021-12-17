@@ -103,7 +103,7 @@ public class MyShopingCarActivity extends BaseActivity {
         Set<String> collection = sharedPreferences.getStringSet("shop_car", new HashSet<>());
         BmobQuery<GoodsEntity> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
+//        query.addWhereEqualTo("goodsLocal", BmobUser.getCurrentUser(UserEntity.class).getUserSchool());
         query.order("-updatedAt");
         query.setLimit(10);
         query.include("goodsOwner");// 查出发布人信息
